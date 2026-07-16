@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moments & Places — Gallery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <svg class="camera-icon" viewBox="0 0 48 30" width="30" height="19" aria-hidden="true">
+      <rect x="1" y="6" width="46" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <rect x="14" y="1" width="14" height="6" rx="1.5" fill="currentColor"/>
+      <circle cx="24" cy="18" r="8" fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <circle cx="24" cy="18" r="3.4" fill="currentColor"/>
+      <rect x="37" y="10" width="4" height="4" rx="1" fill="currentColor"/>
+    </svg>
+    <span class="eyebrow">Visual Collection</span>
+    <h1>Moments &amp; Places</h1>
+    <p class="subtitle">A curated set of scenes, spaces and skylines</p>
+  </header>
+
+  <nav class="site-nav" aria-label="Gallery navigation">
+    <div class="nav-inner">
+      <div class="nav-categories" id="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="nature">Nature</button>
+        <button class="filter-btn" data-filter="urban">Urban</button>
+        <button class="filter-btn" data-filter="interior">Interior</button>
+      </div>
+
+      <div class="nav-search">
+        <input type="text" id="search-input" placeholder="Search photos..." aria-label="Search photos">
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-text-btn" id="theme-toggle">Light Mode</button>
+        <button class="nav-text-btn nav-btn-primary" id="add-photo-trigger">+ Add Photo</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="gallery" id="gallery" aria-live="polite"></section>
+    <p class="no-results" id="no-results" aria-live="polite">No photos yet.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-quote">
+      <span class="quote-mark">&ldquo;</span>
+      Photographs are the quiet way we keep moments from becoming forgotten.
+      <span class="quote-mark">&rdquo;</span>
+    </p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <span class="lightbox-counter" id="lightbox-counter"></span>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#10094;</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next image">&#10095;</button>
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+
+  <!-- Add Photo Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title">Add a New Photo</h2>
+      <form id="add-photo-form">
+
+        <div class="form-group">
+          <label>Image Source</label>
+          <div class="source-toggle">
+            <button type="button" class="source-btn active" id="source-file-btn">Image File</button>
+            <button type="button" class="source-btn" id="source-url-btn">Image URL</button>
+          </div>
+          <input type="file" id="photo-file" accept="image/*">
+          <input type="text" id="photo-url" placeholder="https://example.com/photo.jpg" style="display:none;">
+          <p class="hint" id="url-hint" style="display:none; margin-top:6px;">
+            Paste a <strong>direct</strong> image link (ends in .jpg/.png/.webp/.gif).
+            From Pinterest, Google Images, etc: right-click the image → "Copy Image Address" —
+            a page URL (like pinterest.com/pin/...) won't work.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label for="photo-caption">Caption <span class="hint">(auto-filled from filename, editable)</span></label>
+          <input type="text" id="photo-caption" placeholder="Caption will appear here" required>
+        </div>
+
+        <div class="form-group">
+          <label for="photo-category">Category</label>
+          <select id="photo-category">
+            <option value="nature">Nature</option>
+            <option value="urban">Urban</option>
+            <option value="interior">Interior</option>
+            <option value="__new__">+ Add new category</option>
+          </select>
+          <input type="text" id="new-category-input" placeholder="Type new category name" style="display:none;">
+        </div>
+
+        <p class="form-error" id="form-error" aria-live="assertive"></p>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary">Add Photo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
