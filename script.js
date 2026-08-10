@@ -1,6 +1,4 @@
 // ===== YOUR OWN LOCAL IMAGES =====
-// (Starter images removed — the gallery now begins empty of defaults and
-// only shows what you add yourself.)
 const assetImages = [];
 
 function filenameToCaption(filename) {
@@ -186,7 +184,6 @@ let photos = dedupePhotos([
 
 let visiblePhotos = [...photos];
 
-// Persist the cleaned-up result so old duplicates don't reappear later.
 savePhotos();
 
 // ===== DOM REFERENCES =====
@@ -285,8 +282,6 @@ function deletePhoto(photo) {
   visiblePhotos = visiblePhotos.filter(p => p.id !== photo.id);
   savePhotos();
 
-  // Remove just this one card and let the rest reflow into place,
-  // instead of rebuilding (and briefly blanking) the whole gallery.
   const figure = galleryEl.querySelector(`[data-photo-id="${photo.id}"]`);
   if (figure) figure.remove();
   relayoutGallery();
